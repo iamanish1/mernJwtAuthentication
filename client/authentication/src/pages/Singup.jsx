@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom'
+import { Link, Navigate, useNavigate } from 'react-router-dom'
 import axios from 'axios';
 const Singup = ()=>{
     const [data,setdata] = useState({
@@ -7,6 +7,7 @@ const Singup = ()=>{
         password : "",
         username : "", 
     }) 
+  const naviGate = useNavigate();
 
     const handelonChange = (e)=>{
         const{name,value} = e.target
@@ -40,6 +41,7 @@ const Singup = ()=>{
           });
       
           // Handle success
+          naviGate('/singin')
           console.log("Response:", response.data);
         } catch (error) {
           // Handle errors (e.g., network issues or validation errors)
@@ -81,7 +83,7 @@ const Singup = ()=>{
                         <div>
                             <label htmlFor="Name">Email :</label>
                             <div className="bg-slate-100 p-2 mb-2">
-                            <input type="text"
+                            <input type="email"
                             placeholder='enter your Name..' 
                             className='w-full h-full outline-none bg-transparent'
                             name='email'
@@ -95,7 +97,7 @@ const Singup = ()=>{
                         <div>
                             <label htmlFor="Name">Password :</label>
                             <div className="bg-slate-100 p-2 mt-2">
-                            <input type="text"
+                            <input type="password"
                             placeholder='enter your Name..' 
                             className='w-full h-full outline-none bg-transparent'
                             name='password'
