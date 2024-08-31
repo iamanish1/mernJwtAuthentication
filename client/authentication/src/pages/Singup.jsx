@@ -1,5 +1,58 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom'
+import axios from 'axios';
 const Singup = ()=>{
+    const [data,setdata] = useState({
+        email : "",
+        password : "",
+        username : "", 
+    }) 
+
+    const handelonChange = (e)=>{
+        const{name,value} = e.target
+        setdata((preve)=>{
+            return{
+               ...preve,
+               [name]:value 
+            }
+        })
+    }
+
+    const handleSumbit = async (e) => {
+        e.preventDefault(); // Prevent the default form submission behavior
+      
+        // Assuming 'data' is the state holding your form data
+        const { username, email, password } = data; 
+      
+        console.log("Data for signup:", data);
+      
+        const API_URI = "http://localhost:8000/api/auth/singup";
+        
+      
+        try {
+          console.log("API_URI:", API_URI);
+      
+          // Send POST request to API with form data
+          const response = await axios.post(API_URI, {
+            username,
+            email,
+            password,
+          });
+      
+          // Handle success
+          console.log("Response:", response.data);
+        } catch (error) {
+          // Handle errors (e.g., network issues or validation errors)
+          if (error.response && error.response.data && error.response.data.message) {
+            console.error("Error:", error.response.data.message);
+          } else {
+            console.error("An unexpected error occurred:", error.message);
+          }
+        }
+      
+        console.log("Submission completed");
+      };
+      
     return(
     <>
        <section id="singup"> 
@@ -8,7 +61,7 @@ const Singup = ()=>{
                   <div className="flex justify-center">
                     <h1 className="text-3xl font-semibold font-sans uppercase">Create account</h1>
                   </div>
-                  <form className='pt-6' onSubmit={""}>
+                  <form className='pt-6' onSubmit={handleSumbit}>
                      
                      <div>
                             <label htmlFor="Name">UserName :</label>
@@ -16,8 +69,10 @@ const Singup = ()=>{
                             <input type="text"
                             placeholder='enter your Name..' 
                             className='w-full h-full outline-none bg-transparent'
-                            name='name'
-                            required/>
+                            name='username'
+                            required
+                            onChange={handelonChange}
+                            />
                             
                             
                             </div>
@@ -29,8 +84,9 @@ const Singup = ()=>{
                             <input type="text"
                             placeholder='enter your Name..' 
                             className='w-full h-full outline-none bg-transparent'
-                            name='name'
-                            required/>
+                            name='email'
+                            required
+                            onChange={handelonChange}/>
                             
                             
                             </div>
@@ -42,8 +98,9 @@ const Singup = ()=>{
                             <input type="text"
                             placeholder='enter your Name..' 
                             className='w-full h-full outline-none bg-transparent'
-                            name='name'
+                            name='password'
                             required
+                            onChange={handelonChange}
                             /> 
                             
                             
