@@ -1,7 +1,7 @@
-const test = (req,res)=>{
-    res.json({
-        message : "Hello World"
-    })
+const test = (req, res) => {
+  res.json({
+    message: "Hello World",
+  });
 };
 
-export {test}
+export { test };
