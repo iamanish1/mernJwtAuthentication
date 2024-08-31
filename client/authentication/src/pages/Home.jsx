@@ -1,7 +1,13 @@
 const Home = ()=>{
     return(
     <>
-    <h2>This is my home page </h2>
+    <section id="singup"> 
+        <div className=" container mx-auto  p-4">
+            <div className="bg-white p-6 w-full max-w-md mx-auto rounded shadow-md"> 
+
+            </div>
+        </div>
+    </section>
     </>
 )}
 export default Home ; 

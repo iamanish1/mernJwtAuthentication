@@ -7,7 +7,7 @@ return (
   
 
  <Header/>
-  <main>
+  <main className="min-h-[calc(100vh-120px)]">
      <Outlet />
   </main>
 <Footer/>
