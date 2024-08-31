@@ -20,7 +20,7 @@ const router = createBrowserRouter([
               {
                 path : "/singin",
                 element : <Singin/>,
-              },
+              }, 
               {
                 path : "/profile",
                 element : <Profile/>,
