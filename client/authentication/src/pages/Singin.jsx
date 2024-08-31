@@ -1,6 +1,9 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 const Singin = ()=>{
 
@@ -43,13 +46,17 @@ const Singin = ()=>{
       
           // Handle success
           naviGate('/')
+          toast.success("successfully login")
           console.log("Response:", response.data);
         } catch (error) {
           // Handle errors (e.g., network issues or validation errors)
           if (error.response && error.response.data && error.response.data.message) {
+            toast.warn("Enter a correct password")
             console.error("Error:", error.response.data.message);
+            
           } else {
             console.error("An unexpected error occurred:", error.message);
+            toast.warn("Enter a correct password")
           }
         }
       
@@ -96,12 +103,8 @@ const Singin = ()=>{
                       </div>
                       <div className="flex flex-row justify-center gap-10 max-sm:flex-col max-sm:gap-1">
                       <div>
-                      <button className='lg: bg-black text-white px-3 py-[1.5vmin] w-full max-w-[150px] text-[2.5vmin]
-                     rounded-xl hover:scale-110 transition-all mx-auto block mt-6 max-sm:px-1 max-sm:text-sm'>Login Account</button>
-                     </div>
-                     <div>
-                     <button className='bg-black text-white px-5 py-[1.5vmin] w-full max-w-[150px] text-[2.7vmin]
-                      rounded-xl hover:scale-110 transition-all mx-auto block mt-6 max-sm:px-1 max-sm:text-sm'>User Profile</button>
+                      <button className='lg: bg-black text-white px-6 py-[1.5vmin] w-full max-w-[150px] text-[2.5vmin]
+                     rounded-full hover:scale-110 transition-all mx-auto block mt-6 max-sm:px-1 max-sm:text-sm'>Login Account</button>
                      </div>
                      </div>
                     </div>

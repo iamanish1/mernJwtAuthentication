@@ -1,5 +1,8 @@
 import { useState } from 'react';
-import { Link, Navigate, useNavigate } from 'react-router-dom'
+import { Link,useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 import axios from 'axios';
 const Singup = ()=>{
     const [data,setdata] = useState({
@@ -43,16 +46,20 @@ const Singup = ()=>{
           // Handle success
           naviGate('/singin')
           console.log("Response:", response.data);
+          toast.success("Account created successfully!");
         } catch (error) {
           // Handle errors (e.g., network issues or validation errors)
           if (error.response && error.response.data && error.response.data.message) {
             console.error("Error:", error.response.data.message);
+            toast.error('create a unique user');
           } else {
             console.error("An unexpected error occurred:", error.message);
+            toast.warning('create a unique user');
           }
         }
       
         console.log("Submission completed");
+
       };
       
     return(
@@ -112,13 +119,15 @@ const Singup = ()=>{
                       <button className='lg: bg-black text-white px-4 py-2 w-full max-w-[150px]
                      rounded-full hover:scale-110 transition-all mx-auto block mt-6 max-sm:px-1 max-sm:text-sm'>Create Account</button>
                      </div>
-                     <div>
-                     <button className='bg-black text-white px-4 py-2 w-full max-w-[150px]
-                     rounded-full hover:scale-110 transition-all mx-auto block mt-6 max-sm:px-1 max-sm:text-sm'> Google Account</button>
-                     </div>
                      </div>
                     </div>
-                 </form>  
+                 </form> 
+                 <div>
+                 <div>
+                     <button className='bg-black text-white px-3 py-2 w-full max-w-[150px]
+                     rounded-full hover:scale-110 transition-all mx-auto block mt-6 max-sm:px-1 max-sm:text-sm'> Google Account</button>
+                     </div>
+                </div>
                  <p className='my-5 font-sans text-sm'
                 >Already have account ? <Link to={"/singin"} className=' hover:text-blue-400 hover:underline'
                 >Login</Link></p>

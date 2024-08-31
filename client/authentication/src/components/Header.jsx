@@ -14,7 +14,7 @@ const Header = ()=>{
             <div className="">
                <div className="flex justify-center items-center m-2">
                 <button className=" lg:bg-black  px-5 py-2 text-sm max-[380px]:bg-black text-[4vmin] m-2  
-                bg-black  text-white rounded-full "><Link to={"/singup"}>Create Account</Link></button>
+                bg-black  text-white rounded-full max-sm:px-2 max-sm:text-[4.5vmin] max-sm:rounded-[50vmin] "><Link to={"/singup"}>Create Account</Link></button>
                </div>
             </div>
             
