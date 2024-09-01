@@ -5,18 +5,18 @@ const userAuthentication = async (req, res) => {
   try {
     const { username, email, password } = req.body;
     // Check if the username already exists
-    const existingUser = await User.findOne({ username });
+    const existingUser = await User.findOne({ email});
     if (existingUser) {
       return res
         .status(400)
-        .json({ success: false, message: "Username already exists." });
+        .json({ success: false, message: "email already exists." });
     }
     console.log("user exsist");
 
     const hasPassword = bcryptjs.hashSync(password, 10);
     const newUser = new User({
-      username,
-      email,
+      username : username,
+      email : email,
       password: hasPassword,
     });
     await newUser.save();
@@ -39,7 +39,8 @@ const userAuthentication = async (req, res) => {
       success: false,
     });
   }
-  console.log(req.body);
+  // console.log(req.body);
+  
 };
 
 export { userAuthentication };

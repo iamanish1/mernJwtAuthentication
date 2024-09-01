@@ -3,7 +3,8 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
+import Header from "../components/Header";
+import AuthButton from "../components/AuthButton";
 const Singin = () => {
   const [data, setdata] = useState({
     email: "",
@@ -42,7 +43,11 @@ const Singin = () => {
       });
 
       // Handle success
-      naviGate("/");
+      naviGate("/profile",{
+        state:{
+          email : email ,
+        }
+      });
       toast.success("successfully login");
       console.log("Response:", response.data);
     } catch (error) {
@@ -65,6 +70,7 @@ const Singin = () => {
 
   return (
     <>
+    <Header/>
       <section id="singup">
         <div className=" container mx-auto  p-4">
           <div className="bg-white p-6 w-full max-w-md mx-auto rounded shadow-md">
@@ -104,10 +110,11 @@ const Singin = () => {
                   <div>
                     <button
                       className="lg: bg-black text-white px-6 py-[1.5vmin] w-full max-w-[150px] text-[2.5vmin]
-                     rounded-full hover:scale-110 transition-all mx-auto block mt-6 max-sm:px-1 max-sm:text-sm"
+                     rounded-full hover:scale-110 transition-all mx-auto block mt-6 max-sm:px-1 max-sm:text-sm max-md:text-sm  max-lg:mx-auto"
                     >
                       Login Account
                     </button>
+                    <AuthButton type="email"/>
                   </div>
                 </div>
               </div>

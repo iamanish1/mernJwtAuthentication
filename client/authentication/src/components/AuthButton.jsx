@@ -1,25 +1,54 @@
+/* eslint-disable react/prop-types */
 import { toast } from "react-toastify";
 import { GoogleAuthProvider, signInWithPopup, getAuth } from "@firebase/auth";
 import { app } from "../fireBase";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
-const AuthButton = () => {
+const AuthButton = (props) => {
+  const navigate = useNavigate();
+  
   const handelClick = async () => {
     try {
       // Add your Google OAuth authentication code here
       const provider = new GoogleAuthProvider();
       const auth = getAuth(app);
       const result = await signInWithPopup(auth, provider);
-      const url = "http://localhost:8000/api/auth/googleauth"
-      const res = await axios.post(url, {
-        name: result.user.displayName,
-        email: result.user.email,
-        photoUrl: result.user.photoURL,
-        uid: result.user.uid,
-      });
-      console.log(res);
-      toast.success("Successfully logged in with Google");
-      console.log(result);
+      if(props.type==="email"){
+          var url = "http://localhost:8000/api/auth/googleLogin" ; 
+          const res = await axios.post(url, {
+            name: result.user.displayName,
+            email: result.user.email,
+            photoUrl: result.user.photoURL,
+            uid: result.user.uid,
+          });
+          console.log(res);
+          toast.success("Successfully Login with Google");
+          navigate('/profile',{
+            state:{
+              email : result.user.email,
+            }
+            });
+  
+          
+          console.log(result);
+
+      }else{
+            url = "http://localhost:8000/api/auth/googleauth";
+            const res = await axios.post(url, {
+              name: result.user.displayName,
+              email: result.user.email,
+              photoUrl: result.user.photoURL,
+              uid: result.user.uid,
+            });
+            console.log(res);
+            toast.success("Successfully Created with Google");
+            navigate('/singin')
+            console.log(result);
+
+      }
+   
+
       // For example, you can use the google-auth-library to handle OAuth flow
       // ...
       console.log("Google OAuth authentication code has been added.");
