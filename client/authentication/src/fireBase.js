@@ -5,14 +5,14 @@ import { initializeApp } from "firebase/app";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey : import.meta.env.VITE_API_KEY,
+  apiKey: import.meta.env.VITE_API_KEY,
   authDomain: "jwt-authentication-app.firebaseapp.com",
   projectId: "jwt-authentication-app",
   storageBucket: "jwt-authentication-app.appspot.com",
   messagingSenderId: "489843277845",
-  appId: "1:489843277845:web:e14e87978b80687bb8ce1c"
+  appId: "1:489843277845:web:e14e87978b80687bb8ce1c",
 };
-console.log(JSON.stringify(firebaseConfig.apiKey))
+console.log(JSON.stringify(firebaseConfig.apiKey));
 
 // Initialize Firebase
- export const app = initializeApp(firebaseConfig);
+export const app = initializeApp(firebaseConfig);

@@ -64,4 +64,82 @@ const userSingin = async (req, res) => {
   }
 };
 
-export { userSingin };
+// Google Singin
+
+const userGoogleSignin = async (req, res) => {
+  try {
+    // Find the user by email
+    const user = await User.findOne({ email: req.body.email });
+
+    if (user) {
+      // If the user exists, create a JWT token
+      const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET_KEY, {
+        expiresIn: "30d",
+      });
+
+      // Remove password from user object before sending the response
+      const { password: hashedPassword, ...rest } = user.toObject();
+
+      // Set the cookie and send response
+      res.cookie("access_token", token, {
+        httpOnly: true,
+        maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days in milliseconds
+      });
+
+      return res.status(200).json({
+        message: "User signed in successfully",
+        error: false,
+        success: true,
+        user: rest,
+        token,
+      });
+    } else {
+      // If user does not exist, create a new user
+      const generatedPassword = Math.random().toString(36).slice(-6) + 
+                                Math.random().toString(36).slice(-6);
+      const hashedPassword = await bcryptjs.hash(generatedPassword, 10);
+      const newUser = new User({
+        username: req.body.name.split(" ").join("").toLowerCase() +
+                  Math.floor( Math.random().toString(36).slice(-6)),
+        email: req.body.email,
+        password: hashedPassword,
+        profilePicture: req.body.photo
+      });
+     
+      
+      await newUser.save();
+
+      // Create a JWT token for the new user
+      const token = jwt.sign({ id: newUser._id }, process.env.JWT_SECRET_KEY, {
+        expiresIn: "30d",
+      });
+
+      // Remove password from newUser object before sending the response
+      const { password: newUserHashedPassword, ...rest } = newUser.toObject();
+
+      // Set the cookie and send response
+      res.cookie("access_token", token, {
+        httpOnly: true,
+        maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days in milliseconds
+      });
+
+      return res.status(200).json({
+        message: "New user created and signed in successfully",
+        error: false,
+        success: true,
+        user: rest,
+        token,
+      });
+    }
+  } catch (error) {
+    res.status(500).json({
+      message: error.message,
+      error: true,
+      success: false,
+    });
+  }
+};
+
+
+export { userSingin, userGoogleSignin};
+ 
