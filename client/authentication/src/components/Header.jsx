@@ -7,7 +7,7 @@ const Header = () => {
         <div className=" container max-w-full  bg-white shadow-md flex justify-between">
           <div className="flex justify-center items-center flex-shrink">
             <div className=" text-2xl font-semibold font-sans m-2 max-[380px]:text-[5vmin] ">
-              <span>Authentication</span>
+              <span><Link to="/">Authentication</Link></span>
             </div>
           </div>
 

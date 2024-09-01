@@ -30,7 +30,7 @@ const Singin = () => {
 
     console.log("Data for signup:", data);
 
-    const API_URI = "http://localhost:8000/api/auth//registerUser";
+    const API_URI = import.meta.env.VITE_API_URI;
 
     try {
       console.log("API_URI:", API_URI);

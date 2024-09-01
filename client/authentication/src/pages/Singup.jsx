@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import axios from "axios";
+import AuthButton from "../components/AuthButton";
 const Singup = () => {
   const [data, setdata] = useState({
     email: "",
@@ -124,22 +125,13 @@ const Singup = () => {
                       Create Account
                     </button>
                   </div>
+                  <AuthButton />
                 </div>
               </div>
             </form>
-            <div>
-              <div>
-                <button
-                  className="bg-black text-white px-3 py-2 w-full max-w-[150px]
-                     rounded-full hover:scale-110 transition-all mx-auto block mt-6 max-sm:px-1 max-sm:text-sm"
-                >
-                  {" "}
-                  Google Account
-                </button>
-              </div>
-            </div>
+            
             <p className="my-5 font-sans text-sm">
-              Already have account ?{" "}
+              Already have account ?
               <Link
                 to={"/singin"}
                 className=" hover:text-blue-400 hover:underline"
