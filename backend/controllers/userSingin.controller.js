@@ -95,18 +95,19 @@ const userGoogleSignin = async (req, res) => {
       });
     } else {
       // If user does not exist, create a new user
-      const generatedPassword = Math.random().toString(36).slice(-6) + 
-                                Math.random().toString(36).slice(-6);
+      const generatedPassword =
+        Math.random().toString(36).slice(-6) +
+        Math.random().toString(36).slice(-6);
       const hashedPassword = await bcryptjs.hash(generatedPassword, 10);
       const newUser = new User({
-        username: req.body.name.split(" ").join("").toLowerCase() +
-                  Math.floor( Math.random().toString(36).slice(-6)),
+        username:
+          req.body.name.split(" ").join("").toLowerCase() +
+          Math.floor(Math.random().toString(36).slice(-6)),
         email: req.body.email,
         password: hashedPassword,
-        profilePicture: req.body.photo
+        profilePicture: req.body.photo,
       });
-     
-      
+
       await newUser.save();
 
       // Create a JWT token for the new user
@@ -140,6 +141,4 @@ const userGoogleSignin = async (req, res) => {
   }
 };
 
-
-export { userSingin, userGoogleSignin};
- 
+export { userSingin, userGoogleSignin };
