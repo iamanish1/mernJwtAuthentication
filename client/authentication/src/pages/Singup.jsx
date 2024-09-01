@@ -2,6 +2,8 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Header from "../components/Header";
+
 
 import axios from "axios";
 import AuthButton from "../components/AuthButton";
@@ -67,6 +69,7 @@ const Singup = () => {
 
   return (
     <>
+    <Header/>
       <section id="singup">
         <div className=" container mx-auto  p-4">
           <div className="bg-white p-6 w-full max-w-md mx-auto rounded shadow-md">
